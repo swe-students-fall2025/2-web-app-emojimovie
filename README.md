@@ -12,6 +12,12 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 2. As a user, I want to buy articles of clothing so that I can make better outfits.
 3. As a user, I want to edit my listing so that I can decrease the price of the item.
 4. As a user, I want to post a clothing item so that someone else can benefit from it.
+5. As a user, I want to be able to buy used clothing items from other NYU students.
+6. As a user, I want to be able to see how close the seller/buyer is to me.
+7. As a user, I want to be able to discuss and negotiate with customers and sellers.
+8. As a user, I want to be able to filter through sizes and colors. 
+
+
 
 
 
