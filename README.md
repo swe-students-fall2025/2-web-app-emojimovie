@@ -25,9 +25,6 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 17. As a user, I want to be able to exchange text messages within the app so I can discuss the final price, a meetup time, and location on or near campus.
 18. As a user, I want to receive notifications when another user sends me a message, so that I can respond quickly.
 
-
-
-
 ## Steps necessary to run the software
 
 See instructions. Delete this line and place instructions to download, configure, and run the software here.
