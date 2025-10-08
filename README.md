@@ -22,9 +22,6 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 12. As a user, I want to be able to save items that I’ve liked from sellers, so that I can easily find the clothes I want to buy in the future in a list or in a different page
 
 
-
-See instructions. Delete this line and place a link to the user stories here.
-
 ## Steps necessary to run the software
 
 See instructions. Delete this line and place instructions to download, configure, and run the software here.
