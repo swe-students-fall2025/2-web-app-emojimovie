@@ -8,7 +8,13 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+1. As a user, I want to list a used clothing item so that I can make money.
+2. As a user, I want to buy articles of clothing so that I can make better outfits.
+3. As a user, I want to edit my listing so that I can decrease the price of the item.
+4. As a user, I want to post a clothing item so that someone else can benefit from it.
+
+
+
 
 ## Steps necessary to run the software
 
