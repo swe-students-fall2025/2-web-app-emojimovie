@@ -16,6 +16,11 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 6. As a user, I want to be able to see how close the seller/buyer is to me.
 7. As a user, I want to be able to discuss and negotiate with customers and sellers.
 8. As a user, I want to be able to filter through sizes and colors. 
+9. As a user, I want  to be able to trade in my clothes safely with people I am familiar with
+10. As a user, I want to see the status of clothes and whether they are already sold so I am able to just look at clothes that are still available
+11. As a user, I want to be able to search for clothing styles that I like, so that I can save time looking for clothes
+12. As a user, I want to be able to save items that I’ve liked from sellers, so that I can easily find the clothes I want to buy in the future
+
 
 
 
