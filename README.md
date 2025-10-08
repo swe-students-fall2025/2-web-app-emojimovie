@@ -4,7 +4,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+The NYU Clothing Exchange will be a mobile platform where students can quickly and safely trade, buy, and sell clothes, promoting sustainability and convenience on campus.
 
 ## User stories
 
