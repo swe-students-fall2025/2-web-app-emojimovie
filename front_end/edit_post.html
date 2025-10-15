@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Listing - NYU Clothing Marketplace</title>
+</head>
+
+<body>
+  <div>
+    <h1>Edit Listing</h1>
+    <p>Update the details of your item below</p>
+
+    <form>
+      <div>
+        <img src="item-photo.jpg" alt="Product Image" width="200" height="200">
+        <div>
+          <button type="button">Change Photo</button>
+        </div>
+      </div>
+
+      <div>
+        <h2>Listing Details</h2>
+
+        <div>
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" value="NYU Hoodie - Purple" required>
+        </div>
+
+        <div>
+          <label for="price">Price (USD)</label>
+          <input type="text" id="price" value="35" required>
+        </div>
+
+        <div>
+          <label for="description">Description</label><br>
+          <textarea id="description" rows="4" cols="50">
+            A NYU hoodie in great condition. Only worn a few times and has been kept in storage.
+          </textarea>
+        </div>
+
+        <div>
+          <label for="size">Size</label>
+          <select id="size">
+            <option value="">Select Size</option>
+            <option value="xs">XS</option>
+            <option value="s">S</option>
+            <option value="m" selected>M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit">Save Changes</button>
+        <button type="button">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
