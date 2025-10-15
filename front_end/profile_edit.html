@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - NYU Clothing Marketplace</title>
+</head>
+
+<body>
+    <div>
+        <h1>Edit Profile</h1>
+        <p>Update your profile information and preferences</p>
+
+        <form>
+            <div>
+                <img src="profile-pic.jpg" alt="Profile Picture" width="120" height="120">
+                <div>
+                    <button type="button">Change Photo</button>
+                    <p>JPG or PNG</p>
+                </div>
+            </div>
+
+            <div>
+                <h2>Personal Information</h2>
+
+                <div>
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" value="Jane" required>
+                </div>
+
+                <div>
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" value="Smith" required>
+                </div>
+
+                <div>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" value="js1234@nyu.edu" required>
+                    <p>Must be an active NYU email address</p>
+                </div>
+
+            </div>
+
+            <div>
+                <h2>Preferences</h2>
+
+                <div>
+                    <label for="location">Preferred Meeting Location</label>
+                    <select id="location">
+                        <option value="">Select Location</option>
+                        <option value="bobst" selected>Bobst Library</option>
+                        <option value="kimmel">Kimmel Center</option>
+                        <option value="washington">Washington Square Park</option>
+                        <option value="palladium">Palladium</option>
+                        <option value="brittany">Brittany Hall</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="contactMethod">Preferred Contact Method</label>
+                    <select id="contactMethod">
+                        <option value="email">Email</option>
+                        <option value="text">Text Message</option>
+                        <option value="ig" selected>Instagram</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="contact">Details of your selected contact method</label>
+                    <input type="text" id="contact" placeholder="ig_username">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" onclick="window.location.href='profile.html'">Save Changes</button>
+                <button type="button" onclick="window.location.href='profile.html'">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>
