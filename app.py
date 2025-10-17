@@ -4,4 +4,31 @@ app = Flask(__name__)
 
 @app.get('/')
 def home():
-    return render_template('home.html')
+    return render_template('main_page.html')
+
+@app.get('/edit_post/<int:post_id>')
+def edit_post(post_id):
+    return render_template('edit_post.html', post_id=post_id)
+
+@app.get('/create_post')
+def create_post():
+    return render_template('create_post.html')
+
+@app.get('/post/<int:post_id>')
+def view_post(post_id):
+    return render_template('post.html', post_id=post_id)
+
+@app.get('/user_profile/<int:userid>')
+def user_profile(userid):
+    return render_template('profile.html', userid=userid)
+
+@app.get('/login')
+def login():
+    return render_template('log_in.html')
+
+@app.get('/register')
+def register():
+    return render_template('register.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
