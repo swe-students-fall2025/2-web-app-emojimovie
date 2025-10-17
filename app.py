@@ -1,6 +1,9 @@
 from flask import Flask, render_template
+from back_end.routers.bids_router import bids_router
 
 app = Flask(__name__)
+
+app.register_blueprint(bids_router)
 
 @app.get('/')
 def home():
