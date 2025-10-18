@@ -31,9 +31,11 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 
 ## Steps necessary to run the software
 
-See instructions. Delete this line and place instructions to download, configure, and run the software here.
+1. Creating a new virtual environment: `python -m venv .venv`
+2. Activates the environment: `source .venv/bin/activate` (mac) or `.venv\Scripts\activate` (windows)
+3. Install dependencies: `pip install -r requirements.txt`
 
 ## Task boards
 
-[Sprint 1](https://github.com/orgs/swe-students-fall2025/projects/10)
+[Sprint 1](https://github.com/orgs/swe-students-fall2025/projects/10)  
 [Sprint 2](https://github.com/orgs/swe-students-fall2025/projects/49)
