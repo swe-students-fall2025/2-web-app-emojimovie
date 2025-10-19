@@ -9,15 +9,15 @@ app.register_blueprint(bids_router)
 app.register_blueprint(listings_router)
 app.register_blueprint(users_router)
 
-"""@app.get('/')
+@app.get('/')
 def home():
-    return render_template('main_page.html')"""
+    return render_template('main_page.html')
 
 @app.get('/edit_post/<int:post_id>')
 def edit_post(post_id):
     return render_template('edit_post.html', post_id=post_id)
 
-@app.get('/')
+@app.get('/create_post')
 def create_post():
     return render_template('create_post.html')
 
