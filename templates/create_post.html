@@ -12,11 +12,11 @@
     <h1>Create New Listing</h1>
     <p>Fill out the details below to post your item for sale</p>
 
-    <form>
+    <form id="createListingForm">
       <div>
-        <img src="placeholder.jpg" alt="Upload Preview" width="200" height="200">
+        <img id="preview" src="placeholder.jpg" alt="Upload Preview" width="200" height="200">
         <div>
-          <button type="button">Upload Photo</button>
+          <input type="file" id="photo" name="photo" accept="image/*" style="margin-top: 8px;">
         </div>
       </div>
 
@@ -25,38 +25,33 @@
 
         <div>
           <label for="itemName">Item Name</label>
-          <input type="text" id="itemName" placeholder="e.g. NYU Hoodie - Purple" required>
+          <input type="text" id="itemName" name="name" placeholder="e.g. NYU Hoodie - Purple" required>
         </div>
 
         <div>
           <label for="price">Price (USD)</label>
-          <input type="text" id="price" placeholder="e.g. 35" required>
+          <input type="number" id="price" name="price" placeholder="e.g. 35" required>
         </div>
 
         <div>
           <label for="description">Description</label><br>
-          <textarea id="description" rows="4" cols="50" placeholder="Describe your item (condition, material, etc.)"></textarea>
+          <textarea id="description" name="description" rows="4" cols="50"
+            placeholder="Describe your item (condition, material, etc.)"></textarea>
         </div>
 
-        <div>
-          <label for="size">Size</label>
-          <select id="size" required>
-            <option value="">Select Size</option>
-            <option value="xs">XS</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-          </select>
-        </div>
-      </div>
+       
 
-      <div>
+      <div style="margin-top: 16px;">
         <button type="submit">Post Listing</button>
         <button type="reset">Clear</button>
       </div>
     </form>
+
+    <p id="message"></p>
   </div>
+
+  <script type="module" src="/static/frontend_scripting/create_post.js"></script>
+
 </body>
 
 </html>

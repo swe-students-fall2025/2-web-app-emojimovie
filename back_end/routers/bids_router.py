@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from uuid import uuid4
-from DAL import bids_dal
 
+from back_end.DAL import bids_dal
 bids_router = Blueprint('bids_router', __name__, url_prefix='/bids/api')
 
 @bids_router.post('')

@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, session
-from DAL import users_dal
+from uuid import uuid4
+from back_end.DAL import users_dal
 
 users_router = Blueprint('users_router', __name__, url_prefix='/users/api')
 
