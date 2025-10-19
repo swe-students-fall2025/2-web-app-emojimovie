@@ -20,10 +20,10 @@ def load_user(user_id:str):
     return user_from_record(rec)
 
 PUBLIC_ENDPOINTS = {
-    "home",          # your landing page
-    "login",         # your login endpoint
-    "register",      # signup page
-    "static"         # allow static files (CSS, JS, images)
+    "home",         
+    "login",         
+    "register",      
+    "static"  
 }
 
 
