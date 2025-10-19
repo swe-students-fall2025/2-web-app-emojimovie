@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, session
 from uuid import uuid4
 from flask_login import login_user, logout_user, login_required
-from user import user_from_record
+from back_end.user import user_from_record
 from back_end.DAL import users_dal
 
 users_router = Blueprint('users_router', __name__, url_prefix='/users/api')

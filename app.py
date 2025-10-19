@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 from back_end.routers.bids_router import bids_router
 from back_end.routers.listings_router import listings_router
 from back_end.routers.user_router import users_router
-from user import user_from_record
+from back_end.user import user_from_record
 from back_end.DAL import users_dal
 from flask_login import LoginManager, current_user
 
