@@ -1,0 +1,70 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{
+  margin:0; background:#f3f2f8; color:#17161a;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #e5e5ea}
+header .bar{display:flex;align-items:center;gap:8px;padding:12px 14px;min-height:52px}
+header h1{margin:0;font-size:1.1rem;font-weight:700}
+
+main{padding:12px}
+.page{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+
+.profile-card{
+  background:#fff;border:1px solid #e5e5ea;border-radius:10px;
+  padding:14px;
+}
+.profile-top{display:flex;gap:12px;align-items:center}
+.avatar{
+  width:64px;height:64px;border-radius:50%;object-fit:cover;
+  background:#efe7f7;border:1px solid #e5e5ea;
+}
+.userblock{display:flex;flex-direction:column;gap:4px}
+.username{margin:0;font-size:1.1rem;font-weight:700}
+.handle{margin:0;color:#6b7280;font-size:.9rem}
+.bio{margin:12px 0 0}
+
+.stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.stat{color:#57068c;background:#efe7f7;padding:6px;border-radius:999px}
+
+.profile-actions{display:flex;gap:8px;margin-top:12px}
+.btn{
+  height:40px;border-radius:8px;padding:0 12px;
+  border:1px solid #e5e5ea;background:#fff;color:#17161a;font-weight:600;
+}
+.btn.primary{background:#57068c;color:#fff;border:none}
+
+.section{background:#fff;border:1px solid #e5e5ea;border-radius:10px}
+.section h2{margin:0;padding:12px 14px;font-size:1rem;border-bottom:1px solid #e5e5ea}
+
+.list{display:flex;flex-direction:column}
+.item-row{
+  display:flex;gap:10px;align-items:center;
+  padding:10px 14px;border-top:1px solid #e5e5ea;background:#fff;
+}
+.item-row:first-child{border-top:none}
+.thumb{
+  width:64px;height:64px;border-radius:8px;object-fit:cover;
+  background:#efe7f7;border:1px solid #e5e5ea;
+}
+.item-info{display:flex;flex-direction:column;gap:4px;min-width:0}
+.item-title{margin:0;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item-meta{margin:0;color:#6b7280;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.price{color:#57068c;background:#f3e9fc;padding:6px;border-radius:6px}
+
+footer{text-align:center;padding:10px 0 16px;color:#6b7280;font-size:.92rem}
+footer a{color:#57068c;text-decoration:none}
+
+#section-listings,#section-reviews{display:none}
+body:not(:has(:target)) #section-listings{display:block}
+body:has(#section-listings:target) #section-listings{display:block}
+body:has(#section-reviews:target)  #section-reviews{display:block}
+
+.tabs .btn{background:#fff;color:#17161a;border:1px solid #e5e5ea}
+body:not(:has(:target)) .tabs a[href="#section-listings"],
+body:has(#section-listings:target) .tabs a[href="#section-listings"],
+body:has(#section-reviews:target)  .tabs a[href="#section-reviews"]{
+  background:#57068c;color:#fff;border:none;
+}
