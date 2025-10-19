@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Listing - NYU Clothing Marketplace</title>
+</head>
+
+<body>
+  <div>
+    <h1>Create New Listing</h1>
+    <p>Fill out the details below to post your item for sale</p>
+
+    <form>
+      <div>
+        <img src="placeholder.jpg" alt="Upload Preview" width="200" height="200">
+        <div>
+          <button type="button">Upload Photo</button>
+        </div>
+      </div>
+
+      <div>
+        <h2>Listing Details</h2>
+
+        <div>
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" placeholder="e.g. NYU Hoodie - Purple" required>
+        </div>
+
+        <div>
+          <label for="price">Price (USD)</label>
+          <input type="text" id="price" placeholder="e.g. 35" required>
+        </div>
+
+        <div>
+          <label for="description">Description</label><br>
+          <textarea id="description" rows="4" cols="50" placeholder="Describe your item (condition, material, etc.)"></textarea>
+        </div>
+
+        <div>
+          <label for="size">Size</label>
+          <select id="size" required>
+            <option value="">Select Size</option>
+            <option value="xs">XS</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="submit">Post Listing</button>
+        <button type="reset">Clear</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
