@@ -23,7 +23,9 @@ PUBLIC_ENDPOINTS = {
     "home",         
     "login",         
     "register",      
-    "static"  
+    "static",
+    "user_profile",
+    "profile_edit"
 }
 
 
