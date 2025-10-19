@@ -1,21 +1,38 @@
-from flask import Flask, render_template
+import os
+from flask import Flask, render_template, request
 from back_end.routers.bids_router import bids_router
 from back_end.routers.listings_router import listings_router
 from back_end.routers.user_router import users_router
 from user import user_from_record
 from back_end.DAL import users_dal
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 
 
 app = Flask(__name__)
-app.secret_key="secret"
+app.secret_key= os.environ.get("FLASK_SECRET_KEY")
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+@login_manager.user_loader
 def load_user(user_id:str):
     rec = users_dal.find_user_by_id()
     return user_from_record(rec)
+
+PUBLIC_ENDPOINTS = {
+    "home",          # your landing page
+    "login",         # your login endpoint
+    "register",      # signup page
+    "static"         # allow static files (CSS, JS, images)
+}
+
+
+@app.before_request
+def require_login_globally():
+    if request.endpoint in PUBLIC_ENDPOINTS:
+        return
+    if not current_user.is_authenticated:
+        return login_manager.unauthorized()
 
 app.register_blueprint(bids_router)
 app.register_blueprint(listings_router)

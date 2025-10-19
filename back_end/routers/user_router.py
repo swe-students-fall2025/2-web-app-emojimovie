@@ -13,7 +13,7 @@ def login():
     if user and user['password'] == data.get('password'):
         session['user_id'] = user['_id']
         return jsonify({"message": "Logged in"}), 200
-    login_user(user_from_record(rec),remember = True)
+    login_user(user,remember = True)
     return jsonify({"error": "Invalid credentials"}), 401
 
 def logout():
