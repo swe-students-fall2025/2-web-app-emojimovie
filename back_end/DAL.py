@@ -25,7 +25,7 @@ db = client.get_database(DB_NAME)
 
 #Users
 class users_dal:
-    def instert_one_user(user_data: Dict[str, Any]) -> str:
+    def insert_one_user(user_data: Dict[str, Any]) -> str:
         try:
             result = db.users.insert_one(user_data)
             return str(result.inserted_id)
@@ -88,6 +88,24 @@ class users_dal:
         except PyMongoError as e:
             print(f"Error deleting users: {e}")
             return 0
+    
+    @staticmethod
+    def find_user_by_id(user_id: str) -> Optional[Dict[str, Any]]:
+        try:
+            from bson import ObjectId
+            return users_dal.find_one_user({"_id": ObjectId(user_id)})
+        except Exception as e:
+            print(f"Error finding user by id: {e}")
+            return None
+
+    @staticmethod
+    def find_user_by_email(email: str) -> Optional[Dict[str, Any]]:
+        try:
+            return users_dal.find_one_user({"email": email})
+        except Exception as e:
+            print(f"Error finding user by email: {e}")
+            return None
+
 
 
 

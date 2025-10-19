@@ -146,3 +146,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Picutre upload folder
+static/uploads
