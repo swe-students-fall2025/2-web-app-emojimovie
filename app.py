@@ -1,13 +1,13 @@
 from flask import Flask, render_template
 from back_end.routers.bids_router import bids_router
 from back_end.routers.listings_router import listings_router
-from back_end.routers.user_router import user_router
+from back_end.routers.user_router import users_router
 
 app = Flask(__name__)
 
 app.register_blueprint(bids_router)
 app.register_blueprint(listings_router)
-app.register_blueprint(user_router)
+app.register_blueprint(users_router)
 
 @app.get('/')
 def home():

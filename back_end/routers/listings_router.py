@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from uuid import uuid4
-from DAL import listings_dal
+
+from back_end.DAL import listings_dal
 
 listings_router = Blueprint('listings_router', __name__, url_prefix='/listings/api')
 
@@ -35,7 +36,3 @@ def delete_listing(listing_id):
         return jsonify({"message": "Listing deleted successfully"}), 200
     return jsonify({"error": "Failed to delete listing"}), 500
 
-@listings_router.get('')
-def get_all_listings():
-    listings = listings_dal.find_all_listings()
-    return jsonify(listings), 200

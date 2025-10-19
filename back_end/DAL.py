@@ -4,15 +4,21 @@ from typing import Any, Dict, List, Optional, Union
 
 from bson import ObjectId
 from pymongo import MongoClient
+from pymongo.server_api import ServerApi
+
 from pymongo.errors import PyMongoError
 from dotenv import load_dotenv
+
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env"))
 
 
 #database connection 
 MONGODB_CONNECTION = os.getenv("DATABASE_CONNECTION")
 DB_NAME = os.getenv("DB_NAME")
-client = MongoClient(MONGODB_CONNECTION)
-db = client[DB_NAME]
+client = MongoClient(MONGODB_CONNECTION,server_api=ServerApi('1'))
+client.admin.command('ping')
+
+db = client.get_database(DB_NAME)
 
 #CRUD operations
 #find one and many, create one and many, update one and many, delete one and many
