@@ -1,84 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile - NYU Clothing Marketplace</title>
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/static/css/profile_edit.css">
 </head>
-
 <body>
-    <div>
+    <div class="container">
         <h1>Edit Profile</h1>
-        <p>Update your profile information and preferences</p>
-
-        <form>
-            <div>
-                <img src="profile-pic.jpg" alt="Profile Picture" width="120" height="120">
-                <div>
-                    <button type="button">Change Photo</button>
-                    <p>JPG or PNG</p>
+        
+        <div id="message" class="message" hidden></div>
+        
+        <form id="edit-profile-form">
+            <!-- Profile Information Section -->
+            <section class="form-section">
+                <h2>Profile Information</h2>
+                
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
-            </div>
-
-            <div>
-                <h2>Personal Information</h2>
-
-                <div>
-                    <label for="firstName">First Name *</label>
-                    <input type="text" id="firstName" value="Jane" required>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
-
-                <div>
-                    <label for="lastName">Last Name *</label>
-                    <input type="text" id="lastName" value="Smith" required>
+                
+                <div class="form-group">
+                    <label for="socialMediaType">Social Media Platform:</label>
+                    <select id="socialMediaType" name="socialMediaType">
+                        <option value="Instagram" selected>Instagram</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Text Messages">Text Messages</option>
+                        <option value="Email">Email</option>
+                    </select>
                 </div>
-
-                <div>
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" value="js1234@nyu.edu" required>
-                    <p>Must be an active NYU email address</p>
+                
+                <div class="form-group">
+                    <label for="socialMediaUsername">Social Media Username:</label>
+                    <input type="text" id="socialMediaUsername" name="socialMediaUsername" placeholder="@username">
                 </div>
-
-            </div>
-
-            <div>
+            </section>
+            
+            <!-- Preferences Section -->
+            <section class="form-section">
                 <h2>Preferences</h2>
-
-                <div>
-                    <label for="location">Preferred Meeting Location</label>
-                    <select id="location">
-                        <option value="">Select Location</option>
-                        <option value="bobst" selected>Bobst Library</option>
-                        <option value="kimmel">Kimmel Center</option>
-                        <option value="washington">Washington Square Park</option>
-                        <option value="palladium">Palladium</option>
-                        <option value="brittany">Brittany Hall</option>
-                        <option value="other">Other</option>
-                    </select>
+                
+                <div class="form-group">
+                    <label for="preferredLocation">Preferred Location:</label>
+                    <input type="text" id="preferredLocation" name="preferredLocation" placeholder="e.g., Brooklyn, Manhattan">
                 </div>
-
-                <div>
-                    <label for="contactMethod">Preferred Contact Method</label>
-                    <select id="contactMethod">
-                        <option value="email">Email</option>
-                        <option value="text">Text Message</option>
-                        <option value="ig" selected>Instagram</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="contact">Details of your selected contact method</label>
-                    <input type="text" id="contact" placeholder="ig_username">
-                </div>
-            </div>
-
-            <div>
-                <button type="submit" onclick="window.location.href='profile.html'">Save Changes</button>
-                <button type="button" onclick="window.location.href='profile.html'">Cancel</button>
+            </section>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Changes</button>
+                <button type="button" id="cancel-btn" class="btn-secondary">Cancel</button>
             </div>
         </form>
     </div>
-
+    
+    <script src="/static/js/profile_edit.js"></script>
 </body>
-
 </html>
