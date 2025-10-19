@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile - NYU Clothing Marketplace</title>
+  <meta charset="UTF-8" />
+  <title>Edit Profile - NYU Clothing Marketplace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-    <div>
-        <h1>Edit Profile</h1>
-        <p>Update your profile information and preferences</p>
+  <div class="container">
 
-        <form>
-            <div>
-                <img src="profile-pic.jpg" alt="Profile Picture" width="120" height="120">
-                <div>
-                    <button type="button">Change Photo</button>
-                    <p>JPG or PNG</p>
-                </div>
-            </div>
-
-            <div>
-                <h2>Personal Information</h2>
-
-                <div>
-                    <label for="firstName">First Name *</label>
-                    <input type="text" id="firstName" value="Jane" required>
-                </div>
-
-                <div>
-                    <label for="lastName">Last Name *</label>
-                    <input type="text" id="lastName" value="Smith" required>
-                </div>
-
-                <div>
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" value="js1234@nyu.edu" required>
-                    <p>Must be an active NYU email address</p>
-                </div>
-
-            </div>
-
-            <div>
-                <h2>Preferences</h2>
-
-                <div>
-                    <label for="location">Preferred Meeting Location</label>
-                    <select id="location">
-                        <option value="">Select Location</option>
-                        <option value="bobst" selected>Bobst Library</option>
-                        <option value="kimmel">Kimmel Center</option>
-                        <option value="washington">Washington Square Park</option>
-                        <option value="palladium">Palladium</option>
-                        <option value="brittany">Brittany Hall</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="contactMethod">Preferred Contact Method</label>
-                    <select id="contactMethod">
-                        <option value="email">Email</option>
-                        <option value="text">Text Message</option>
-                        <option value="ig" selected>Instagram</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="contact">Details of your selected contact method</label>
-                    <input type="text" id="contact" placeholder="ig_username">
-                </div>
-            </div>
-
-            <div>
-                <button type="submit" onclick="window.location.href='profile.html'">Save Changes</button>
-                <button type="button" onclick="window.location.href='profile.html'">Cancel</button>
-            </div>
-        </form>
+    <div class="title">
+      <h1>Edit Profile</h1>
+      <p class="tagline">Update your profile information and preferences</p>
     </div>
 
-</body>
+    <form>
+      <div class="card">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="/static/uploads/profile-pic.jpg" alt="Profile Picture" width="80" height="80" style="border-radius:50%; object-fit:cover;">
+          <div>
+            <button type="button" class="btn">Change Photo</button>
+          </div>
+        </div>
+      </div>
 
+      <div class="section">
+        <h2>Personal Information</h2>
+        <div class="card" style="margin:0; border:none; padding:16px;">
+          <label for="firstName">First Name *</label>
+          <input class="text" type="text" id="firstName" value="Jane" required>
+
+          <label for="lastName">Last Name *</label>
+          <input class="text" type="text" id="lastName" value="Doe" required>
+
+          <label for="email">Email *</label>
+          <input class="text" type="email" id="email" value="jd1234@nyu.edu" required>
+          <p class="meta">Must be an active NYU email address</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Preferences</h2>
+        <div class="card" style="margin:0; border:none; padding:16px;">
+      
+          <div class="form-row">
+            <label for="location">Preferred Meeting Location</label>
+            <select id="location">
+              <option value="">Select Location</option>
+              <option value="bobst" selected>Bobst Library</option>
+              <option value="kimmel">Kimmel Center</option>
+              <option value="washington">Washington Square Park</option>
+              <option value="palladium">Palladium</option>
+              <option value="brittany">Brittany Hall</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+      
+          <div class="form-row">
+            <label for="contactMethod">Contact Method</label>
+            <select id="contactMethod">
+              <option value="email">Email</option>
+              <option value="text">Text Message</option>
+              <option value="ig" selected>Instagram</option>
+            </select>
+          </div>
+      
+          <div class="form-row">
+            <label for="contact">Details of your selected contact method</label>
+            <input type="text" id="contact">
+          </div>
+      
+        </div>
+      </div>      
+
+      <div class="card" style="display:flex; gap:10px;">
+        <a class="btn primary" href="{{ url_for('user_profile', userid=userid) }}">Save Changes</a>
+        <a class="btn" href="{{ url_for('user_profile', userid=userid) }}">Cancel</a>
+      </div>
+    </form>
+
+  </div>
+</body>
 </html>
