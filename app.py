@@ -58,6 +58,10 @@ def view_post(post_id):
 def user_profile(userid):
     return render_template('profile.html', userid=userid)
 
+@app.get('/user_profile/<int:userid>/edit')
+def profile_edit(userid):              
+    return render_template('profile_edit.html', userid=userid)
+
 @app.get('/login')
 def login():
     return render_template('log_in.html')
