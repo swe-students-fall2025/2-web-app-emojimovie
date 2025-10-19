@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify, session
 from uuid import uuid4
+from flask_login import login_user, logout_user, login_required
+from user import user_from_record
 from back_end.DAL import users_dal
 
 users_router = Blueprint('users_router', __name__, url_prefix='/users/api')
@@ -11,8 +13,12 @@ def login():
     if user and user['password'] == data.get('password'):
         session['user_id'] = user['_id']
         return jsonify({"message": "Logged in"}), 200
+    login_user(user_from_record(rec),remember = True)
     return jsonify({"error": "Invalid credentials"}), 401
 
+def logout():
+    logout_user()
+    return jsonify({"message": "Logged out"}),200
 @users_router.get('/profile/<user_id>')
 def profile(user_id):
     user = users_dal.find_user_by_id(user_id)

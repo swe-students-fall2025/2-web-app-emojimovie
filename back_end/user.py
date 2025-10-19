@@ -1,25 +1,13 @@
 
-import flask_login
+from flask_login import UserMixin
 
-class User (flask_login.UserMixin):
-    pass
+class User(UserMixin):
+    def __init__(self, _id, email):
+        self.id = str(_id)
+        self.email = email
 
-@login_manager.user_loader
-def user_loader(email):
-    if email not in users:
-        return
-
-    user = User()
-    user.id = email
-    return user
-
-
-@login_manager.request_loader
-def request_loader(request):
-    email = request.form.get('email')
-    if email not in users:
-        return
-
-    user = User()
-    user.id = email
-    return user
+    def user_from_record(rec):
+        if rec:
+            return User(rec["_id"], rec.get("email"),"")
+        else:
+            None

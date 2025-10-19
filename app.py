@@ -2,15 +2,20 @@ from flask import Flask, render_template
 from back_end.routers.bids_router import bids_router
 from back_end.routers.listings_router import listings_router
 from back_end.routers.user_router import users_router
-import flask_login
+from user import user_from_record
+from back_end.DAL import users_dal
+from flask_login import LoginManager
 
 
 app = Flask(__name__)
 app.secret_key="secret"
 
-login_manager = flask_login.LoginManager()
+login_manager = LoginManager()
 login_manager.init_app(app)
 
+def load_user(user_id:str):
+    rec = users_dal.find_user_by_id()
+    return user_from_record(rec)
 
 app.register_blueprint(bids_router)
 app.register_blueprint(listings_router)
