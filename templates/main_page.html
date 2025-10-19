@@ -34,56 +34,7 @@
     <p id="empty" hidden>No results.</p>
   </main>
 
-  <script>
-    // use CRUD to pull actual data
-    function findAll() {
-      return [
-        { title: "Coffee Table", price: 75, image: "https://picsum.photos/seed/table/400/300" },
-        { title: "Mountain Bike", price: 250, image: "https://picsum.photos/seed/bike/400/300" },
-        { title: "Laptop", price: 600, image: "https://picsum.photos/seed/laptop/400/300" },
-        { title: "Sofa", price: 400, image: "https://picsum.photos/seed/sofa/400/300" },
-        { title: "Air Fryer", price: 50, image: "https://picsum.photos/seed/fryer/400/300" },
-        { title: "Bookshelf", price: 90, image: "https://picsum.photos/seed/bookshelf/400/300" },
-        { title: "Headphones", price: 120, image: "https://picsum.photos/seed/headphones/400/300" },
-        { title: "Desk Chair", price: 130, image: "https://picsum.photos/seed/chair/400/300" },
-        { title: "Dining Set", price: 350, image: "https://picsum.photos/seed/dining/400/300" },
-        { title: "Camera", price: 500, image: "https://picsum.photos/seed/camera/400/300" }
-      ];
-    }
+  <script defer src="{{ url_for('static', filename='frontend_scripting/main_page.js') }}"></script>
 
-    const grid = document.getElementById("grid");
-    const empty = document.getElementById("empty");
-
-    function renderListings(listings) {
-      grid.innerHTML = ""; // Clear any old content
-
-      if (!listings || listings.length === 0) {
-        empty.hidden = false;
-        return;
-      }
-
-      empty.hidden = true;
-
-      listings.forEach(item => {
-        const article = document.createElement("article");
-        article.className = "item";
-        article.dataset.title = item.title;
-        article.dataset.price = item.price;
-
-        article.innerHTML = `
-          <img src="${item.image}" alt="${item.title}" width="100%">
-          <h3>${item.title}</h3>
-          <p>Price: $<span class="price">${item.price}</span></p>
-          <button class="bid">Submit Bid</button>
-        `;
-
-        grid.appendChild(article);
-      });
-    }
-
-    // Render everything dynamically
-    const listings = findAll();
-    renderListings(listings);
-  </script>
 </body>
 </html>
