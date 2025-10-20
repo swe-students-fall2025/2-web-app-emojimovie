@@ -112,7 +112,6 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-// Handle back to profile button
 const backToProfileBtn = document.getElementById("back-to-profile-btn");
 if (backToProfileBtn) {
     backToProfileBtn.addEventListener("click", (e) => {

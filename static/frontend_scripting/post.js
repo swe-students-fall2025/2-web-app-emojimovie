@@ -114,7 +114,6 @@ async function displayListing(listing) {
     `;
 }
 
-// Add event listeners after the listing is displayed
 function addEventListeners() {
     const submitBidBtn = document.getElementById("submit-bid-btn");
     const bidPriceDiv = document.getElementById("bid-price");
@@ -175,7 +174,6 @@ function addEventListeners() {
     }
 }
 
-// Back to home functionality
 const backToHomeBtn = document.getElementById("back-to-home-btn");
 if (backToHomeBtn) {
     backToHomeBtn.addEventListener("click", () => {
