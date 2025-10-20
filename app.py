@@ -16,19 +16,15 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id:str):
-    rec = users_dal.find_user_by_id()
+    rec = users_dal.find_user_by_id(user_id)
     return user_from_record(rec)
 
 PUBLIC_ENDPOINTS = {
-    "home",         
     "login",         
     "register",      
     "static",
-    "user_profile",
-    "profile_edit",
-    "view_post",
-    "edit_post",
-    "create_post"
+    "users_router.login",
+    "users_router.register"
 }
 
 
