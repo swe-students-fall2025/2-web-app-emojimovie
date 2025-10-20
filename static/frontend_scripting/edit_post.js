@@ -126,3 +126,44 @@ if (backToProfileBtn) {
         }
     });
 }
+
+const deleteListingBtn = document.getElementById("delete-listing-btn");
+if (deleteListingBtn) {
+    deleteListingBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        if (
+            !confirm("Are you sure you want to delete this listing? This action cannot be undone.")
+        ) {
+            return;
+        }
+
+        try {
+            const res = await fetch(`/listings/api/${listingId}`, {
+                method: "DELETE",
+                credentials: "same-origin",
+            });
+
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error(errorText || `HTTP ${res.status}`);
+            }
+
+            message.style.color = "green";
+            message.textContent = "Listing deleted successfully!";
+
+            setTimeout(() => {
+                const userId = window.currentUserId;
+                if (userId) {
+                    window.location.href = `/user_profile/${userId}`;
+                } else {
+                    window.location.href = "/";
+                }
+            }, 1000);
+        } catch (err) {
+            console.error("Error deleting listing:", err);
+            message.style.color = "red";
+            message.textContent = "Error deleting listing. Please try again.";
+        }
+    });
+}
