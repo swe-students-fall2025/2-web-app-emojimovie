@@ -32,77 +32,14 @@
 <body>
     <main>
         <div class="page">
-
-            <section class="profile-card">
-                <div class="profile-top">
-                    <div class="userblock">
-                        <h1 class="username">Jane Doe</h1>
-
-                        <div class="stats">
-                            <span class="stat"><strong>24</strong> Items Listed</span>
-                            <span class="stat"><strong>4.9</strong> Rating</span>
-                        </div>
-                    </div>
+            <div class="profile-navigation">
+                <button id="back-to-home-btn" class="btn">← Back to Home</button>
+            </div>
+            <div id="profile-container">
+                <div class="loading">
+                    <p>Loading profile...</p>
                 </div>
-
-                <div class="profile-actions">
-                    <a class="btn" href="{{ url_for('profile_edit', userid=userid) }}">Edit Profile</a>
-                </div>
-            </section>
-
-            <nav class="section">
-                <h2>Sections</h2>
-                <div class="profile-actions tabs">
-                    <a class="btn primary" href="#section-listings">Active Listings</a>
-                    <a class="btn" href="#section-reviews">Reviews</a>
-                </div>
-            </nav>
-
-            <section id="section-reviews" class="section">
-                <h2>Reviews</h2>
-                <div class="list">
-
-                    <div class="item-row">
-                        <img class="thumb" src="..." alt="">
-                        <div class="item-info">
-                            <p class="item-title">Great seller, quick meetup!</p>
-                            <p class="item-meta">@violetcat · 5★</p>
-                        </div>
-                    </div>
-
-                    <div class="item-row">
-                        <img class="thumb" src="..." alt="">
-                        <div class="item-info">
-                            <p class="item-title">Item as described, would buy again.</p>
-                            <p class="item-meta">@metro_nyu · 4.5★</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="section-listings" class="section">
-                <h2>Active Listings</h2>
-                <div class="list">
-
-                    <div class="item-row">
-                        <img class="thumb" src="..." alt="NYU Hoodie">
-                        <div class="item-info">
-                            <p class="item-title">NYU Hoodie - Purple</p>
-                            <p class="item-meta"><span class="price">$35</span> · <span>Like New</span></p>
-                        </div>
-                    </div>
-
-                    <div class="item-row">
-                        <img class="thumb" src="..." alt="Levi's Jeans">
-                        <div class="item-info">
-                            <p class="item-title">Levi's Jeans</p>
-                            <p class="item-meta"><span class="price">$40</span> · <span>Good</span></p>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
+            </div>
         </div>
     </main>
     <script src="{{ url_for('static', filename='frontend_scripting/profile.js') }}"></script>

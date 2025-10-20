@@ -27,8 +27,12 @@ PUBLIC_ENDPOINTS = {
     "login",
     "register",
     "static",
+    "index",
     "users_router.login",
     "users_router.register",
+    "users_router.profile",
+    "users_router.edit_profile",
+    "listings_router.get_all_listings",
 }
 
 
@@ -43,6 +47,11 @@ def require_login_globally():
 app.register_blueprint(bids_router)
 app.register_blueprint(listings_router)
 app.register_blueprint(users_router)
+
+
+@app.get("/")
+def index():
+    return render_template("log_in.html")
 
 
 @app.get("/home/<userid>")

@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <title>Marketplace</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/static/css/main_page.css">
 </head>
+
 <body>
-  <header>
-    <h1>Marketplace</h1>
+    <header>
+        <h1>Marketplace</h1>
+        <nav>
+            <button id="profile-btn">Profile</button>
+            <button id="create-post-btn">Create Post</button>
+        </nav>
+    </header>
 
-    <div>
-      <label for="search">Search:</label>
-      <input id="search" type="search" placeholder="Search listings..." />
+    <div class="controls">
+        <input type="text" id="search" placeholder="Search listings...">
+        <select id="sort">
+            <option value="none">Sort by</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+        </select>
+        <button id="reset">Reset</button>
     </div>
 
-    <div>
-      <label for="sort">Sort by price:</label>
-      <select id="sort">
-        <option value="none">None</option>
-        <option value="asc">Low → High</option>
-        <option value="desc">High → Low</option>
-      </select>
-      <button id="reset">Reset</button>
-    </div>
+    <main>
+        <div id="grid"></div>
+        <p id="empty" hidden>No listings available.</p>
+    </main>
 
-    <hr />
-  </header>
-
-  <main>
-    <section id="grid"
-      style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
-    </section>
-
-    <p id="empty" hidden>No results.</p>
-  </main>
-
-  <script defer src="{{ url_for('static', filename='frontend_scripting/main_page.js') }}"></script>
+    <script>
+        window.currentUserId = "{{ userid }}";
+    </script>
+    <script defer src="{{ url_for('static', filename='frontend_scripting/main_page.js') }}"></script>
 
 </body>
-</html>
+
+</html> 

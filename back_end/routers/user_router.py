@@ -12,7 +12,7 @@ def login():
     data = request.json
     user_record = users_dal.find_one_user({"email": data.get("email")})
     if user_record and user_record["password"] == data.get("password"):
-        user_obj = user_from_record(user_record) 
+        user_obj = user_from_record(user_record)
         login_user(user_obj, remember=True)
         return jsonify({"message": "Logged in"}), 200
     return jsonify({"error": "Invalid credentials"}), 401
@@ -27,12 +27,27 @@ def logout():
 @users_router.get("/profile/<user_id>")
 def profile(user_id):
     try:
+        print(f"Fetching profile for user_id: {user_id}")
         user = users_dal.find_one_user({"_id": ObjectId(user_id)})
+        print(f"User found: {user is not None}")
 
         if user:
             user["_id"] = str(user["_id"])
+
+            from back_end.DAL import listings_dal
+
+            user_listings = listings_dal.find_many_listings({"user_id": user_id})
+            print(f"Found {len(user_listings)} listings for user")
+            user["listings"] = user_listings
+            user["listingsCount"] = len(user_listings)
+
+            user["rating"] = user.get("rating", "N/A")
+            user["reviews"] = user.get("reviews", [])
+
+            print(f"Returning user data: {user}")
             return jsonify(user), 200
 
+        print(f"User not found for ID: {user_id}")
         return jsonify({"error": "User not found"}), 404
     except Exception as e:
         print(f"Error fetching profile: {e}")
