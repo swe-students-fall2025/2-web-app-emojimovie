@@ -34,6 +34,14 @@ The NYU Clothing Exchange will be a mobile platform where students can quickly a
 1. Creating a new virtual environment: `python -m venv .venv`
 2. Activates the environment: `source .venv/bin/activate` (mac) or `.venv\Scripts\activate` (windows)
 3. Install dependencies: `pip install -r requirements.txt`
+4. Create a .env file: `touch .env`
+5. Create your Database cluster locally or on Atlas
+6. Put the database connection link as `DATABASE_CONNECTION=` and database name as `DB_NAME=` in your .env. For example:
+    ```
+    DATABASE_CONNECTION=mongodb://localhost:27017
+    DB_NAME=cluster0
+    ```
+7. Run the program by `python app.py`
 
 ## Task boards
 
