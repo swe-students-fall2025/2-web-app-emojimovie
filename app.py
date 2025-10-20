@@ -75,7 +75,8 @@ def create_post():
 
 @app.get("/post/<post_id>")
 def view_post(post_id):
-    return render_template("post.html", post_id=post_id)
+    user_id = current_user.get_id() if current_user.is_authenticated else ""
+    return render_template("post.html", post_id=post_id, userid=user_id)
 
 
 @app.get("/user_profile/<userid>")

@@ -45,7 +45,7 @@
         article.className = "item";
         let html = "";
         if (item.image) {
-            html += `<img src="${item.image}" alt="${escapeHtml(item.itemName)}" style="width:100%;height:auto;">`;
+            html += `<img src="${item.image}" alt="${escapeHtml(item.itemName)}" style="max-width:200px;max-height:200px;">`;
         }
         html += `
       <h3 style="margin:.5rem 0;">${escapeHtml(item.itemName)}</h3>
@@ -57,10 +57,10 @@
         if (item.description) {
             html += `<p style="margin:.25rem 0;color:#555;">${escapeHtml(item.description)}</p>`;
         }
-        html += `<button type="button">Submit Bid</button>`;
+        html += `<button type="button">View Details</button>`;
         article.innerHTML = html;
         article.querySelector("button").addEventListener("click", () => {
-            alert(`Submit bid for: ${item.itemName}`);
+            window.location.href = `/post/${item.id}`;
         });
         return article;
     };
