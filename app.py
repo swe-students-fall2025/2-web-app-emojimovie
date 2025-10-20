@@ -78,8 +78,36 @@ def login():
             return render_template('log_in.html', error="Invalid username or password")
     return render_template('log_in.html')
 
-@app.get('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if not username or not email or not password:
+            return render_template('register.html', error="Please fill in all fields")
+        
+        if users_dal.find_one_user({"email": email}):
+            return render_template('register.html', error="Email already registered")
+        user_data = {
+            "email": email,
+            "password": password,
+            "name": username,
+            "preferredLocation": "",
+            "socialMediaType": "",
+            "socialMediaUsername": "",
+        }
+        
+        inserted_id = users_dal.insert_one_user(user_data)
+        
+        if inserted_id:
+            user_record = users_dal.find_one_user({"_id": inserted_id})
+            user_obj = user_from_record(user_record)
+            login_user(user_obj, remember=True)
+            return redirect(f'/home/{inserted_id}')
+        else:
+            return render_template('register.html', error="Registration failed. Please try again.")
     return render_template('register.html')
 
 if __name__ == '__main__':

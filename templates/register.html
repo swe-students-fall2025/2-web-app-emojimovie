@@ -16,6 +16,12 @@
         <p class="tagline">Join the NYU Marketplace!</p>
       </div>
 
+      {% if error %}
+      <div class="error-message" style="background-color: #ffebee; color: #c62828; padding: 12px; border-radius: 4px; margin: 10px 0; border: 1px solid #ffcdd2; text-align: center;">
+        {{ error }}
+      </div>
+      {% endif %}
+
       <form action="{{ url_for('register') }}" method="POST" class="card">
         <label for="username">Username</label>
         <input class="text" type="text" id="username" name="username" placeholder="Choose a username" required>
@@ -25,9 +31,6 @@
 
         <label for="password">Password</label>
         <input class="password" type="password" id="password" name="password" placeholder="Create a password" required>
-
-        <label for="confirm">Confirm Password</label>
-        <input class="password" type="password" id="confirm" name="confirm" placeholder="Re-enter your password" required>
 
         <button class="submit" type="submit">Create Account</button>
       </form>
@@ -39,5 +42,6 @@
 
     </div>
   </main>
+  <script src="{{ url_for('static', filename='frontend_scripting/register.js') }}"></script>
 </body>
 </html>
