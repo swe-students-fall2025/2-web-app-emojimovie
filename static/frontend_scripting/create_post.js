@@ -17,7 +17,7 @@ photoInput.addEventListener('change', () => {
 
   const reader = new FileReader();
   reader.onload = e => {
-    base64Image = e.target.result; // e.g., "data:image/jpeg;base64,...."
+    base64Image = e.target.result;
     previewImg.src = base64Image;
     previewImg.style.display = 'block';
   };
