@@ -15,10 +15,16 @@
             <p class="tagline">Update the details of your item</p>
         </div>
 
-        <form id="edit-post-form">
+        <form id="editListingForm">
+            <div id="message"></div>
+
             <div class="card" style="display:flex; align-items:center; gap:12px;">
-                <img class="thumb" src="..." alt="Product Image" width="100" height="100">
-                <button type="button" class="btn">Change Photo</button>
+                <img id="preview" class="thumb" src="" alt="Product Image" width="100" height="100"
+                    style="display:none;">
+                <div>
+                    <input type="file" id="photo" accept="image/*" style="margin-bottom:8px;">
+                    <p class="meta">Upload a new photo to replace the current one</p>
+                </div>
             </div>
 
             <div class="section">
@@ -28,28 +34,30 @@
                         <div class="item" style="padding:0; border-bottom:0;">
                             <div>
                                 <label for="itemName">Item Name</label>
-                                <input class="text" type="text" id="itemName" value="NYU Hoodie - Purple" required>
+                                <input class="text" type="text" id="itemName" name="itemName" required>
                             </div>
                             <div style="width:160px;">
                                 <label for="price">Price (USD)</label>
-                                <input class="text" type="number" id="price" value="35" required>
+                                <input class="text" type="number" id="price" name="price" required>
                             </div>
                         </div>
                         <div>
                             <label for="description">Description</label>
-                            <textarea id="description"
-                                rows="4">A NYU hoodie in great condition. Only worn a few times and has been kept in storage.</textarea>
+                            <textarea id="description" name="description" rows="4"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="card" style="display:flex; gap:10px;">
-                <a class="btn" href="{{ url_for('view_post', post_id=post_id) }}">Save Changes</a>
-                <a class="btn-light" href="{{ url_for('view_post', post_id=post_id) }}">Cancel</a>
+                <button type="submit" class="btn">Save Changes</button>
+                <a class="btn-light" href="#" id="back-to-profile-btn">Go Back</a>
             </div>
         </form>
     </div>
+    <script>
+        window.currentUserId = "{{ user_id }}";
+    </script>
     <script src="{{ url_for('static', filename='frontend_scripting/edit_post.js') }}"></script>
 </body>
 

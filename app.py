@@ -33,6 +33,8 @@ PUBLIC_ENDPOINTS = {
     "users_router.profile",
     "users_router.edit_profile",
     "listings_router.get_all_listings",
+    "edit_post",
+    "view_post",
 }
 
 
@@ -59,17 +61,19 @@ def home(userid):
     return render_template("main_page.html", userid=userid)
 
 
-@app.get("/edit_post/<int:post_id>")
+@app.get("/edit_post/<post_id>")
 def edit_post(post_id):
-    return render_template("edit_post.html", post_id=post_id)
+    user_id = current_user.get_id() if current_user.is_authenticated else ""
+    return render_template("edit_post.html", post_id=post_id, user_id=user_id)
 
 
 @app.get("/create_post")
 def create_post():
-    return render_template("create_post.html")
+    user_id = current_user.get_id() if current_user.is_authenticated else ""
+    return render_template("create_post.html", user_id=user_id)
 
 
-@app.get("/post/<int:post_id>")
+@app.get("/post/<post_id>")
 def view_post(post_id):
     return render_template("post.html", post_id=post_id)
 

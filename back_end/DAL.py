@@ -12,18 +12,19 @@ from dotenv import load_dotenv
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "../.env"))
 
 
-#database connection 
+# database connection
 MONGODB_CONNECTION = os.getenv("DATABASE_CONNECTION")
 DB_NAME = os.getenv("DB_NAME")
-client = MongoClient(MONGODB_CONNECTION,server_api=ServerApi('1'))
-client.admin.command('ping')
+client = MongoClient(MONGODB_CONNECTION, server_api=ServerApi("1"))
+client.admin.command("ping")
 
 db = client.get_database(DB_NAME)
 
-#CRUD operations
-#find one and many, create one and many, update one and many, delete one and many
+# CRUD operations
+# find one and many, create one and many, update one and many, delete one and many
 
-#Users
+
+# Users
 class users_dal:
     def insert_one_user(user_data: Dict[str, Any]) -> str:
         try:
@@ -56,7 +57,7 @@ class users_dal:
         except PyMongoError as e:
             print(f"Error finding users: {e}")
             return []
-        
+
     def update_one_user(filter: Dict[str, Any], update_data: Dict[str, Any]) -> bool:
         try:
             result = db.users.update_one(filter, {"$set": update_data})
@@ -72,7 +73,7 @@ class users_dal:
         except PyMongoError as e:
             print(f"Error updating users: {e}")
             return 0
-        
+
     def delete_one_user(filter: Dict[str, Any]) -> bool:
         try:
             result = db.users.delete_one(filter)
@@ -83,16 +84,17 @@ class users_dal:
 
     def delete_many_users(filter: Dict[str, Any]) -> int:
         try:
-            result = db.users.delete_many(filter)  
+            result = db.users.delete_many(filter)
             return result.deleted_count
         except PyMongoError as e:
             print(f"Error deleting users: {e}")
             return 0
-    
+
     @staticmethod
     def find_user_by_id(user_id: str) -> Optional[Dict[str, Any]]:
         try:
             from bson import ObjectId
+
             return users_dal.find_one_user({"_id": ObjectId(user_id)})
         except Exception as e:
             print(f"Error finding user by id: {e}")
@@ -107,9 +109,7 @@ class users_dal:
             return None
 
 
-
-
-#Listings
+# Listings
 class listings_dal:
     def insert_one_listing(listing_data: Dict[str, Any]) -> str:
         try:
@@ -149,9 +149,11 @@ class listings_dal:
             return result.modified_count > 0
         except PyMongoError as e:
             print(f"Error updating listing: {e}")
-            return False
-        
-    def update_many_listings(filter: Dict[str, Any], update_data: Dict[str, Any]) -> int:
+            raise e
+
+    def update_many_listings(
+        filter: Dict[str, Any], update_data: Dict[str, Any]
+    ) -> int:
         try:
             result = db.listings.update_many(filter, {"$set": update_data})
             return result.modified_count
@@ -169,14 +171,14 @@ class listings_dal:
 
     def delete_many_listings(filter: Dict[str, Any]) -> int:
         try:
-            result = db.listings.delete_many(filter)  
+            result = db.listings.delete_many(filter)
             return result.deleted_count
         except PyMongoError as e:
             print(f"Error deleting listings: {e}")
             return 0
 
 
-#Bids
+# Bids
 class bids_dal:
     def insert_one_bid(bid_data: Dict[str, Any]) -> str:
         try:
@@ -234,11 +236,10 @@ class bids_dal:
             print(f"Error deleting bid: {e}")
             return False
 
-    def delete_many_bids(filter: Dict[str, Any]) -> int:   
+    def delete_many_bids(filter: Dict[str, Any]) -> int:
         try:
-            result = db.bids.delete_many(filter)  
+            result = db.bids.delete_many(filter)
             return result.deleted_count
         except PyMongoError as e:
             print(f"Error deleting bids: {e}")
             return 0
-

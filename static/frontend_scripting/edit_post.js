@@ -1,25 +1,25 @@
-const form = document.getElementById('editListingForm');
-const photoInput = document.getElementById('photo');
-const previewImg = document.getElementById('preview');
-const message = document.getElementById('message');
+const form = document.getElementById("editListingForm");
+const photoInput = document.getElementById("photo");
+const previewImg = document.getElementById("preview");
+const message = document.getElementById("message");
 
 let base64Image = "";
 let photoName = "";
 let photoType = "";
 
-const listingId = new URLSearchParams(window.location.search).get('id');
+const listingId = window.location.pathname.split("/").pop();
 
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener("DOMContentLoaded", async () => {
     if (!listingId) {
-        message.style.color = 'red';
-        message.textContent = 'No listing ID provided.';
+        message.style.color = "red";
+        message.textContent = "No listing ID provided.";
         return;
     }
 
     try {
         const res = await fetch(`/listings/api/${listingId}`, {
-            method: 'GET',
-            credentials: 'same-origin'
+            method: "GET",
+            credentials: "same-origin",
         });
 
         if (!res.ok) {
@@ -27,24 +27,23 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
 
         const listing = await res.json();
-        
-        form.itemName.value = listing.itemName || '';
-        form.description.value = listing.description || '';
-        form.size.value = listing.size || '';
-        form.price.value = listing.price || '';
+
+        form.itemName.value = listing.itemName || "";
+        form.description.value = listing.description || "";
+        form.price.value = listing.price || "";
 
         if (listing.photo && listing.photo.url) {
             previewImg.src = listing.photo.url;
-            previewImg.style.display = 'block';
+            previewImg.style.display = "block";
         }
     } catch (err) {
-        console.error('Error loading listing:', err);
-        message.style.color = 'red';
-        message.textContent = 'Error loading listing data.';
+        console.error("Error loading listing:", err);
+        message.style.color = "red";
+        message.textContent = "Error loading listing data.";
     }
 });
 
-photoInput.addEventListener('change', () => {
+photoInput.addEventListener("change", () => {
     const file = photoInput.files && photoInput.files[0];
     if (!file) return;
 
@@ -52,57 +51,78 @@ photoInput.addEventListener('change', () => {
     photoType = file.type || "";
 
     const reader = new FileReader();
-    reader.onload = e => {
+    reader.onload = (e) => {
         base64Image = e.target.result;
         previewImg.src = base64Image;
-        previewImg.style.display = 'block';
+        previewImg.style.display = "block";
     };
     reader.readAsDataURL(file);
 });
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    message.textContent = '';
+    message.textContent = "";
 
     const payload = {
-        itemName: (form.itemName?.value || '').trim(),
-        description: (form.description?.value || '').trim(),
-        size: (form.size?.value || '').trim(),
-        price: (form.price?.value || '').trim(),
+        itemName: (form.itemName?.value || "").trim(),
+        description: (form.description?.value || "").trim(),
+        price: (form.price?.value || "").trim(),
     };
 
     if (base64Image) {
         payload.photo = {
             name: photoName,
             content_type: photoType,
-            data_url: base64Image
+            data_url: base64Image,
         };
     }
 
     try {
+        console.log("Sending payload:", payload);
+        console.log("Listing ID:", listingId);
+
         const res = await fetch(`/listings/api/${listingId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
-            credentials: 'same-origin'
+            credentials: "same-origin",
         });
+
+        console.log("Response status:", res.status);
+        console.log("Response ok:", res.ok);
 
         if (!res.ok) {
             const t = await res.text();
+            console.error("Error response:", t);
             throw new Error(t || `HTTP ${res.status}`);
         }
 
         const data = await res.json();
-        message.style.color = 'green';
-        message.textContent = data.message || 'Listing updated successfully!';
-        
+        message.style.color = "green";
+        message.textContent = data.message || "Listing updated successfully!";
+
         base64Image = "";
         photoName = "";
         photoType = "";
         photoInput.value = "";
     } catch (err) {
-        console.error('Error updating listing:', err);
-        message.style.color = 'red';
-        message.textContent = 'Error updating listing.';
+        console.error("Error updating listing:", err);
+        message.style.color = "red";
+        message.textContent = "Error updating listing.";
     }
 });
+
+// Handle back to profile button
+const backToProfileBtn = document.getElementById("back-to-profile-btn");
+if (backToProfileBtn) {
+    backToProfileBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const userId = window.currentUserId;
+        if (userId) {
+            window.location.href = `/user_profile/${userId}`;
+        } else {
+            console.error("User ID not found");
+            alert("Error: Cannot navigate to profile page");
+        }
+    });
+}

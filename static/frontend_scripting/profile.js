@@ -96,6 +96,9 @@ const renderProfile = (user) => {
               <p class="item-title">${escapeHtml(listing.itemName || "Untitled")}</p>
               <p class="item-meta"><span class="price">$${listing.price || "0"}</span> · <span>${listing.description || "No description"}</span></p>
             </div>
+            <div class="item-actions">
+              <button class="btn edit-listing-btn" data-listing-id="${escapeHtml(listing._id || listing.id)}" style="background-color:#007bff; color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px;">Edit</button>
+            </div>
           </div>
         `
                       )
@@ -107,6 +110,16 @@ const renderProfile = (user) => {
   `;
 
     profileContainer.innerHTML = profileHtml;
+
+    const editButtons = profileContainer.querySelectorAll(".edit-listing-btn");
+    editButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const listingId = e.target.getAttribute("data-listing-id");
+            if (listingId) {
+                window.location.href = `/edit_post/${listingId}`;
+            }
+        });
+    });
 };
 
 async function fetchProfile() {
