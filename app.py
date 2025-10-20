@@ -39,9 +39,9 @@ app.register_blueprint(bids_router)
 app.register_blueprint(listings_router)
 app.register_blueprint(users_router)
 
-@app.get('/')
-def home():
-    return render_template('main_page.html')
+@app.get('/home/<int:userid>')
+def home(userid):
+    return render_template('main_page.html', userid=userid)
 
 @app.get('/edit_post/<int:post_id>')
 def edit_post(post_id):

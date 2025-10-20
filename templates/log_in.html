@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>Log In</h1>
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - NYU Marketplace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  <main>
+    <div class="container">
+
+      <div class="title">
+        <h1>LOGIN</h1>
+        <p class="tagline">Welcome back to the NYU Marketplace</p>
+      </div>
+
+      <form action="{{ url_for('login') }}" method="POST" class="card">
+        <label for="username">Username</label>
+        <input class="text" type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input class="password" type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <button class="submit" type="submit">Login</button>
+      </form>
+
+      <div class="card" style="text-align:center;">
+        <p>Don't have an account?</p>
+        <a class="btn" href="{{ url_for('register') }}">Sign Up</a>
+      </div>
+
+    </div>
+  </main>
+</body>
 </html>

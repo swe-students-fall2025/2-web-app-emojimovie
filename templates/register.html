@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up - NYU Marketplace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+  <main>
+    <div class="container">
+
+      <div class="title">
+        <h1>SIGN UP</h1>
+        <p class="tagline">Join the NYU Marketplace!</p>
+      </div>
+
+      <form action="{{ url_for('register') }}" method="POST" class="card">
+        <label for="username">Username</label>
+        <input class="text" type="text" id="username" name="username" placeholder="Choose a username" required>
+
+        <label for="email">Email</label>
+        <input class="text" type="email" id="email" name="email" placeholder="Enter your NYU email" required>
+
+        <label for="password">Password</label>
+        <input class="password" type="password" id="password" name="password" placeholder="Create a password" required>
+
+        <label for="confirm">Confirm Password</label>
+        <input class="password" type="password" id="confirm" name="confirm" placeholder="Re-enter your password" required>
+
+        <button class="submit" type="submit">Create Account</button>
+      </form>
+
+      <div class="card" style="text-align:center;">
+        <p>Already have an account?</p>
+        <a class="btn" href="{{ url_for('login') }}">Login</a>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
