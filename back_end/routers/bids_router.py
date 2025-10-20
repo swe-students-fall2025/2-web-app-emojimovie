@@ -20,6 +20,18 @@ def get_bid(bid_id):
         return jsonify(bid), 200
     return jsonify({"error": "Bid not found"}), 404
 
+@bids_router.get('/highest/<listing_id>')
+def get_highest_bid(listing_id):
+    if not listing_id:
+        return jsonify({"error": "listing_id query parameter is required"}), 400
+
+    bids = bids_dal.find_many_bids({"listing_id": listing_id})
+    if not bids:
+        return jsonify({"error": "No bids found for this listing"}), 404
+
+    highest_bid = max(bids, key=lambda x: x.get('bid_amount', 0))
+    return jsonify(highest_bid), 200
+
 @bids_router.put('/<bid_id>')
 def update_bid(bid_id):
     update_data = request.json
@@ -34,5 +46,7 @@ def delete_bid(bid_id):
     if success:
         return jsonify({"message": "Bid deleted successfully"}), 200
     return jsonify({"error": "Failed to delete bid"}), 500
+
+
 
 

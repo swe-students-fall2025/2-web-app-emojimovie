@@ -1,40 +1,39 @@
 const profileContainer = document.getElementById("profile-container");
 
 const escapeHtml = (s) =>
-    String(s)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
+  String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 
 const getUserIdFromPath = () => {
-    const pathParts = window.location.pathname.split("/");
-    return pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+  const pathParts = window.location.pathname.split("/");
+  return pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+};
+
+const formatCurrency = (num) => {
+  if (num == null || num === "" || isNaN(Number(num))) return "No bids";
+  return `$${Number(num).toFixed(2)}`;
 };
 
 const renderProfile = (user) => {
-    if (!user) {
-        profileContainer.innerHTML = `
-      <div class="error">
-        <p>User not found</p>
-      </div>
-    `;
-        return;
-    }
+  if (!user) {
+    profileContainer.innerHTML = `<div class="error"><p>User not found</p></div>`;
+    return;
+  }
 
-    // Build social media display if available
-    let socialMediaHtml = "";
-    if (user.socialMediaType && user.socialMediaUsername) {
-        socialMediaHtml = `
+  let socialMediaHtml = "";
+  if (user.socialMediaType && user.socialMediaUsername) {
+    socialMediaHtml = `
       <div class="social-media">
         <strong>${escapeHtml(user.socialMediaType)}:</strong> 
         ${escapeHtml(user.socialMediaUsername)}
-      </div>
-    `;
-    }
+      </div>`;
+  }
 
-    const profileHtml = `
+  const profileHtml = `
     <section class="profile-card">
       <div class="profile-top">
         <div class="userblock">
@@ -51,127 +50,101 @@ const renderProfile = (user) => {
         <a class="btn" href="/user_profile/${escapeHtml(user._id || user.id)}/edit">Edit Profile</a>
       </div>
     </section>
-
-    <nav class="section">
-      <h2>Sections</h2>
-      <div class="profile-actions tabs">
-        <a class="btn primary" href="#section-listings">Active Listings</a>
-        <a class="btn" href="#section-reviews">Reviews</a>
-      </div>
-    </nav>
-
-    <section id="section-reviews" class="section">
-      <h2>Reviews</h2>
-      <div class="list">
-        ${
-            user.reviews && user.reviews.length > 0
-                ? user.reviews
-                      .map(
-                          (review) => `
-          <div class="item-row">
-            <div class="item-info">
-              <p class="item-title">${escapeHtml(review.text || "")}</p>
-              <p class="item-meta">${escapeHtml(review.reviewer || "Anonymous")} · ${review.rating || "5"}★</p>
-            </div>
-          </div>
-        `
-                      )
-                      .join("")
-                : "<p>No reviews yet</p>"
-        }
-      </div>
-    </section>
-
     <section id="section-listings" class="section">
       <h2>Active Listings</h2>
       <div class="list">
         ${
-            user.listings && user.listings.length > 0
-                ? user.listings
-                      .map(
-                          (listing) => `
+          user.listings && user.listings.length > 0
+            ? user.listings
+                .map(
+                  (listing) => `
           <div class="item-row">
-            ${listing.photo && listing.photo.url ? `<img class="thumb" src="${listing.photo.url}" alt="${escapeHtml(listing.itemName || "Item")}">` : ""}
+            ${
+              listing.photo && listing.photo.url
+                ? `<img class="thumb" src="${listing.photo.url}" alt="${escapeHtml(listing.itemName || "Item")}">`
+                : ""
+            }
             <div class="item-info">
               <p class="item-title">${escapeHtml(listing.itemName || "Untitled")}</p>
-              <p class="item-meta"><span class="price">$${listing.price || "0"}</span> · <span>${listing.description || "No description"}</span></p>
+              <p class="item-meta">
+                <span class="price">${formatCurrency(listing.price || 0)}</span>
+                · <span>${escapeHtml(listing.description || "No description")}</span><br>
+                <span class="highest-bid" data-listing-id="${escapeHtml(listing._id)}">
+                  Highest bid: Loading...
+                </span>
+              </p>
             </div>
             <div class="item-actions">
-              <button class="btn edit-listing-btn" data-listing-id="${escapeHtml(listing._id || listing.id)}" style="background-color:#007bff; color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px;">Edit</button>
+              <button class="btn edit-listing-btn" data-listing-id="${escapeHtml(listing._id)}"
+                style="background-color:#007bff; color:white; border:none; padding:6px 12px; border-radius:4px; font-size:12px;">
+                Edit
+              </button>
             </div>
-          </div>
-        `
-                      )
-                      .join("")
-                : "<p>No active listings</p>"
+          </div>`
+                )
+                .join("")
+            : "<p>No active listings</p>"
         }
       </div>
-    </section>
-  `;
+    </section>`;
 
-    profileContainer.innerHTML = profileHtml;
+  profileContainer.innerHTML = profileHtml;
 
-    const editButtons = profileContainer.querySelectorAll(".edit-listing-btn");
-    editButtons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-            const listingId = e.target.getAttribute("data-listing-id");
-            if (listingId) {
-                window.location.href = `/edit_post/${listingId}`;
-            }
-        });
+  const highestBidElems = document.querySelectorAll(".highest-bid");
+  highestBidElems.forEach(async (elem) => {
+    const id = (elem.dataset.listingId || "").trim();
+    if (!id) {
+      elem.textContent = "Highest bid: No bids";
+      console.warn("Missing listing id for element:", elem);
+      return;
+    }
+    const urls = [`/bids/api/highest/${encodeURIComponent(id)}`];
+    let amount = null;
+    for (const url of urls) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) continue;
+        const data = await res.json();
+        const amountRaw =
+          data?.amount ??
+          data?.highest?.amount ??
+          data?.bid?.amount ??
+          data?.bid_amount ??
+          data?.price ??
+          null;
+        amount = amountRaw;
+        break;
+      } catch {}
+    }
+    elem.textContent = `Highest bid: ${amount == null ? "No bids" : `$${Number(amount).toFixed(2)}`}`;
+  });
+
+  const editButtons = profileContainer.querySelectorAll(".edit-listing-btn");
+  editButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const listingId = e.target.getAttribute("data-listing-id");
+      if (listingId) window.location.href = `/edit_post/${listingId}`;
     });
+  });
 };
 
 async function fetchProfile() {
-    if (!profileContainer) {
-        console.error("Profile container not found");
-        return;
-    }
-
-    const userId = getUserIdFromPath();
-
-    if (!userId) {
-        profileContainer.innerHTML = `
-      <div class="error">
-        <p>Invalid user ID</p>
-      </div>
-    `;
-        return;
-    }
-
-    try {
-        const res = await fetch(`/users/api/profile/${userId}`, {
-            method: "GET",
-        });
-
-        if (!res.ok) {
-            const errorText = await res.text();
-            throw new Error(errorText || "Failed to fetch profile");
-        }
-
-        const user = await res.json();
-        renderProfile(user);
-    } catch (error) {
-        console.error("Error fetching profile:", error);
-        profileContainer.innerHTML = `
-      <div class="error">
-        <p>Error loading profile. Please try again later.</p>
-      </div>
-    `;
-    }
+  const userId = getUserIdFromPath();
+  try {
+    const res = await fetch(`/users/api/profile/${userId}`);
+    const user = await res.json();
+    renderProfile(user);
+  } catch (err) {
+    console.error("Error fetching profile:", err);
+  }
 }
 
 fetchProfile();
 
 const backToHomeBtn = document.getElementById("back-to-home-btn");
 if (backToHomeBtn) {
-    backToHomeBtn.addEventListener("click", () => {
-        const userId = getUserIdFromPath();
-        if (userId) {
-            window.location.href = `/home/${userId}`;
-        } else {
-            console.error("User ID not found for home navigation");
-            alert("Error: Cannot navigate to home page");
-        }
-    });
+  backToHomeBtn.addEventListener("click", () => {
+    const id = (window.currentUserId || getUserIdFromPath() || "").trim();
+    window.location.href = id ? `/home/${encodeURIComponent(id)}` : "/home";
+  });
 }

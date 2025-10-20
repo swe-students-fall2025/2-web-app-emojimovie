@@ -7,6 +7,11 @@ const bidPriceDiv = document.getElementById("bid-price");
 const bidForm = document.getElementById("bid-form");
 const cancelBidBtn = document.getElementById("cancel-bid-btn");
 
+const getUserIdFromPath = () => {
+    const pathParts = window.location.pathname.split("/");
+    return pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+};
+
 window.addEventListener("DOMContentLoaded", async () => {
     if (!listingId) {
         message.style.color = "red";
@@ -145,7 +150,7 @@ function addEventListeners() {
                 const res = await fetch("/bids/api", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
+                    body: JSON.stringify({...payload, user_id: getUserIdFromPath()}),
                     credentials: "same-origin",
                 });
 
