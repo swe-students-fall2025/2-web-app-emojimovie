@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Marketplace</title>
+  <meta charset="UTF-8" />
+  <title>Home - NYU Marketplace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
+
 <body>
-  <header>
-    <h1>Marketplace</h1>
-
-    <div>
-      <label for="search">Search:</label>
-      <input id="search" type="search" placeholder="Search listings..." />
-    </div>
-
-    <div>
-      <label for="sort">Sort by price:</label>
-      <select id="sort">
-        <option value="none">None</option>
-        <option value="asc">Low → High</option>
-        <option value="desc">High → Low</option>
-      </select>
-      <button id="reset">Reset</button>
-    </div>
-
-    <hr />
-  </header>
-
   <main>
-    <section id="grid"
-      style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;">
+    <div class="profile-page">
+      <a class="btn" href="{{ url_for('user_profile', userid=userid)}}">My Profile</a>
+    </div>
+
+    <section class="profile-card">
+      <div class="profile-top">
+        <div class="userblock" style="text-align:center;">
+          <h1 class="username">Marketplace</h1>
+        </div>
+      </div>
     </section>
 
-    <p id="empty" hidden>No results.</p>
+    <section class="section">
+      <h2>All Listings</h2>
+      <div class="filter-bar">
+        <div class="filter">
+          <label for="price-filter">Filter by Price:</label>
+          <select id="price-filter" name="price-filter">
+            <option value="all">All</option>
+            <option value="low-high">Low to High</option>
+            <option value="high-low">High to Low</option>
+            <option value="under25">Under $25</option>
+            <option value="25-50">$25 - $50</option>
+            <option value="50plus">$50+</option>
+          </select>
+        </div>
+
+        <div class="filter">
+          <label for="size-filter">Filter by Size:</label>
+          <select id="size-filter" name="size-filter">
+            <option value="all">All</option>
+            <option value="xs">XS</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="list">
+
+        <div class="item-row">
+          <img class="thumb" src="/static/uploads/nyu-hoodie.jpg" alt="NYU Hoodie">
+          <div class="item-info">
+            <p class="item-title">NYU Hoodie - Purple</p>
+            <p class="item-meta"><span class="price">$35</span> · Like New</p>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <img class="thumb" src="/static/uploads/levis-jeans.jpg" alt="Levi's Jeans">
+          <div class="item-info">
+            <p class="item-title">Levi’s Jeans</p>
+            <p class="item-meta"><span class="price">$40</span> · Good</p>
+          </div>
+        </div>
+
+        <div class="item-row">
+          <img class="thumb" src="/static/uploads/nyu-sweater.jpg" alt="NYU Sweater">
+          <div class="item-info">
+            <p class="item-title">NYU Sweater</p>
+            <p class="item-meta"><span class="price">$25</span> · Fair</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
   </main>
-
-  <script defer src="{{ url_for('static', filename='frontend_scripting/main_page.js') }}"></script>
-
 </body>
 </html>
