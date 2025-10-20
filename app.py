@@ -25,7 +25,10 @@ PUBLIC_ENDPOINTS = {
     "register",      
     "static",
     "user_profile",
-    "profile_edit"
+    "profile_edit",
+    "view_post",
+    "edit_post",
+    "create_post"
 }
 
 
