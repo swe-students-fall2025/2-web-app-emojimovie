@@ -1,11 +1,11 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from back_end.routers.bids_router import bids_router
 from back_end.routers.listings_router import listings_router
 from back_end.routers.user_router import users_router
 from back_end.user import user_from_record
 from back_end.DAL import users_dal
-from flask_login import LoginManager, current_user
+from flask_login import LoginManager, current_user, login_user
 
 
 app = Flask(__name__)
@@ -63,8 +63,19 @@ def user_profile(userid):
 def profile_edit(userid):              
     return render_template('profile_edit.html', userid=userid)
 
-@app.get('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user_record = users_dal.find_one_user({"email": username})
+        
+        if user_record and user_record["password"] == password:
+            user_obj = user_from_record(user_record)
+            login_user(user_obj, remember=True)
+            return redirect(f'/home/{user_record["_id"]}')
+        else:
+            return render_template('log_in.html', error="Invalid username or password")
     return render_template('log_in.html')
 
 @app.get('/register')
