@@ -8,6 +8,6 @@ class User(UserMixin):
         
 def user_from_record(rec):
     if rec:
-        return User(rec["_id"], rec.get("email"),"")
+        return User(rec["_id"], rec.get("email"))
     else:
-        None
+        return None
