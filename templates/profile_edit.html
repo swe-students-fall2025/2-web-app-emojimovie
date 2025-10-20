@@ -40,7 +40,8 @@
 
                     <div class="forms">
                         <label for="preferredLocation">Preferred Location:</label>
-                    <input type="text" id="preferredLocation" name="preferredLocation" placeholder="e.g., Kimmel, Bobst">
+                        <input type="text" id="preferredLocation" name="preferredLocation"
+                            placeholder="e.g., Kimmel, Bobst">
                     </div>
 
                     <div class="forms">
@@ -69,7 +70,8 @@
         </form>
 
     </div>
-    <script src="/static/js/profile_edit.js"></script>
+    <script src="{{ url_for('static', filename='frontend_scripting/profile_edit.js') }}"></script>
+
 </body>
 
 </html>
